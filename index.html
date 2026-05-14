@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Part 2 — Keyword Blitz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 1 — START
+  ══════════════════════════════════════════ -->
+  <div id="screen-start" class="screen active">
+    <div class="start-inner">
+
+      <div class="logo-block">
+        <div class="logo-badge">IELTS</div>
+        <h1 class="game-title">Keyword<br/>Blitz</h1>
+        <p class="game-sub">Part 2 Speaking — Vocabulary Trainer</p>
+      </div>
+
+      <div class="settings-card">
+
+        <div class="setting-row">
+          <label class="setting-label">
+            <span class="setting-icon">⚡</span>
+            Timer speed
+          </label>
+          <div class="speed-buttons">
+            <button class="speed-btn active" data-speed="7">Relaxed <span class="speed-hint">7s</span></button>
+            <button class="speed-btn" data-speed="5">Normal <span class="speed-hint">5s</span></button>
+            <button class="speed-btn" data-speed="3">Fast <span class="speed-hint">3s</span></button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <label class="setting-label">
+            <span class="setting-icon">🎯</span>
+            Keywords per round
+            <span class="kw-count-display" id="kw-count-display">10</span>
+          </label>
+          <input type="range" id="kw-slider" min="5" max="15" value="10" step="1" class="kw-slider" />
+          <div class="slider-labels">
+            <span>5</span><span>10</span><span>15</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="progress-summary" id="progress-summary">
+        <div class="progress-pill">
+          <span class="prog-num" id="prog-done">0</span>
+          <span class="prog-label">/ 25 topics done</span>
+        </div>
+        <button class="reset-btn" id="reset-btn">Reset progress</button>
+      </div>
+
+      <button class="btn-start" id="btn-start">
+        Let's go →
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 2 — TOPIC CARD
+  ══════════════════════════════════════════ -->
+  <div id="screen-topic" class="screen">
+    <div class="topic-inner">
+
+      <div class="topic-meta">
+        <div class="topic-badge" id="topic-badge">Topic 1 of 25</div>
+        <div class="topic-progress-dots" id="topic-dots"></div>
+      </div>
+
+      <div class="cue-card" id="cue-card">
+        <div class="cue-title" id="cue-title">Perfect Job</div>
+        <div class="cue-body" id="cue-body"></div>
+      </div>
+
+      <div class="topic-hint">
+        Read the cue card, then press Ready to start identifying keywords.
+      </div>
+
+      <button class="btn-ready" id="btn-ready">
+        I'm ready →
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 3 — GAME
+  ══════════════════════════════════════════ -->
+  <div id="screen-game" class="screen">
+
+    <div class="game-header">
+      <div class="hud-left">
+        <div class="hud-label">Score</div>
+        <div class="hud-value" id="hud-score">0</div>
+      </div>
+      <div class="hud-center">
+        <div class="streak-display" id="streak-display">
+          <span class="streak-fire" id="streak-fire">🔥</span>
+          <span class="streak-num" id="streak-num">0</span>
+          <span class="streak-label">streak</span>
+        </div>
+      </div>
+      <div class="hud-right">
+        <div class="hud-label">Left</div>
+        <div class="hud-value" id="hud-remaining">10</div>
+      </div>
+    </div>
+
+    <div class="topic-reminder" id="topic-reminder">
+      Perfect Job
+    </div>
+
+    <div class="keyword-card">
+      <span class="keyword-word" id="keyword-word">vocation</span>
+    </div>
+
+    <div class="timer-bar-wrap">
+      <div class="timer-bar-track">
+        <div class="timer-bar-fill" id="timer-bar-fill"></div>
+      </div>
+      <div class="timer-bar-label" id="timer-bar-label">7s</div>
+    </div>
+
+    <div class="answer-zone">
+      <button class="btn-no" id="btn-no" aria-label="This word does NOT fit the topic">
+        <span class="btn-icon">✕</span>
+        <span class="btn-label">No</span>
+      </button>
+      <button class="btn-yes" id="btn-yes" aria-label="This word fits the topic">
+        <span class="btn-icon">✓</span>
+        <span class="btn-label">Yes</span>
+      </button>
+    </div>
+
+    <div class="answer-feedback" id="answer-feedback"></div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 4 — REVIEW
+  ══════════════════════════════════════════ -->
+  <div id="screen-review" class="screen">
+    <div class="review-inner">
+
+      <div class="review-header">
+        <div class="review-score-block">
+          <div class="review-score-big" id="review-score-big">8/10</div>
+          <div class="review-score-label">Round complete!</div>
+        </div>
+        <div class="review-stars" id="review-stars"></div>
+      </div>
+
+      <div class="review-topic-name" id="review-topic-name">Perfect Job</div>
+
+      <div class="review-list" id="review-list"></div>
+
+      <div class="review-actions">
+        <button class="btn-next-topic" id="btn-next-topic">Next topic →</button>
+        <button class="btn-back-home" id="btn-back-home">← Home</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 5 — ALL DONE
+  ══════════════════════════════════════════ -->
+  <div id="screen-done" class="screen">
+    <div class="done-inner">
+      <div class="done-trophy">🏆</div>
+      <h2 class="done-title">All 25 topics complete!</h2>
+      <p class="done-sub">Outstanding work. Your vocabulary is exam-ready.</p>
+      <div class="done-final-score" id="done-final-score">Total score: 0</div>
+      <button class="btn-start" id="btn-play-again">Play again →</button>
+    </div>
+  </div>
+
+
+  <script src="questions.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
